@@ -237,9 +237,9 @@ class Product extends Component {
             <div className="flex justify-between gap-4">
               <button
                 className="hover:bg-slate-200 normal-case border rounded px-2 py-1 flex-1"
-                onClick={(e) => this.btnAddClick(e)}
+                onClick={(e) => this.btnUpdateClick(e)}
               >
-                Cancel
+                Confirm
               </button>
               <button
                 type="button"
@@ -261,11 +261,17 @@ class Product extends Component {
   }
 
   openUpdateProduct(item) {
-    const { _id, name, price, category } = item;
+    const { _id, name, price, category, image } = item;
+
     const modal = document.querySelector('#update-product-dlg');
     modal.dataset.id = _id;
     modal.querySelector('[name="name"]').value = name;
     modal.querySelector('[name="price"]').value = price;
+    modal.querySelectorAll('option').forEach((option) => {
+      if (option.value === category._id) option.selected = true;
+    });
+    this.state.imgProduct = 'data:image/jpg;base64,' + image;
+
     modal.showModal();
   }
 
@@ -284,7 +290,6 @@ class Product extends Component {
   componentDidMount() {
     this.apiGetProducts(this.state.curPage);
     this.apiGetCategories();
-    document.querySelector('#add-product-dlg').showModal();
   }
 
   // event-handlers
@@ -332,14 +337,16 @@ class Product extends Component {
 
   btnUpdateClick(e) {
     e.preventDefault();
-    const id = this.state.txtID;
-    const name = this.state.txtName;
-    const price = parseInt(this.state.txtPrice);
-    const category = this.state.cmbCategory;
+    const form = document.querySelector('#update-product-dlg');
+    const id = form.dataset.id;
+    const name = form.querySelector('[name="name"]').value;
+    const price = parseInt(form.querySelector('[name="price"]').value);
+    const category = form.querySelector('[name="category"]').value;
     const image = this.state.imgProduct.replace(
       /^data:image\/[a-z]+;base64,/,
       ''
     ); // remove "data:image/...;base64,"
+    // console.log(id, name, price, category, image);
     if (id && name && price && category && category !== 'select' && image) {
       const prod = {
         name: name,
