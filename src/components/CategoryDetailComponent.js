@@ -4,6 +4,7 @@ import MyContext from '../contexts/MyContext';
 
 class CategoryDetail extends Component {
   static contextType = MyContext; // using this.context to access global state
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,7 @@ class CategoryDetail extends Component {
       txtName: '',
     };
   }
+
   render() {
     return (
       <form>
@@ -148,4 +150,5 @@ class CategoryDetail extends Component {
     }
   }
 }
+
 export default CategoryDetail;
