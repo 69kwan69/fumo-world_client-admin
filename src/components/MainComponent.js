@@ -4,6 +4,8 @@ import Menu from './MenuComponent';
 import Home from './HomeComponent';
 import Category from './CategoryComponent';
 import Product from './ProductComponent';
+import Order from './OrderComponent';
+import Customer from './CustomerComponent';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 class Main extends Component {
@@ -21,6 +23,8 @@ class Main extends Component {
             <Route path="/admin/home" element={<Home />} />
             <Route path="/admin/category" element={<Category />} />
             <Route path="/admin/product" element={<Product />} />
+            <Route path="/admin/order" element={<Order />} />
+            <Route path="/admin/customer" element={<Customer />} />
           </Routes>
         </div>
       );
