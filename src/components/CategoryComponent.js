@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
-import CategoryDetail from './CategoryDetailComponent';
+// import CategoryDetail from './CategoryDetailComponent';
 
 class Category extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -19,7 +19,7 @@ class Category extends Component {
       return (
         <tr
           className={
-            index % 2 == 0
+            index % 2 === 0
               ? 'hover:bg-slate-100'
               : 'hover:bg-slate-100 bg-slate-50'
           }

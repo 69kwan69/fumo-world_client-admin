@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
-import ProductDetail from './ProductDetailComponent';
+// import ProductDetail from './ProductDetailComponent';
 
 class Product extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -43,7 +43,7 @@ class Product extends Component {
         <tr
           key={item._id}
           className={
-            index % 2 == 0
+            index % 2 === 0
               ? 'hover:bg-slate-100'
               : 'hover:bg-slate-100 bg-slate-50'
           }
