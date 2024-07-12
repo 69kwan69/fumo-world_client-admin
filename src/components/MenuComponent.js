@@ -4,38 +4,56 @@ import { Link } from 'react-router-dom';
 
 class Menu extends Component {
   static contextType = MyContext; // using this.context to access global state
+  
   render() {
     return (
-      <div className="border-bottom">
-        <div className="float-left">
-          <ul className="menu">
-            <li className="menu">
-              <Link to="/admin/home">Home</Link>
+      <div className="border p-4 flex items-center justify-between">
+        <div className="uppercase">
+          <ul className="flex gap-4">
+            <li>
+              <Link className="hover:underline decoration-2" to="/admin/home">
+                Home
+              </Link>
             </li>
-            <li className="menu">
-              <Link to="/admin/category">Category</Link>
+            <li>
+              <Link
+                className="hover:underline decoration-2"
+                to="/admin/category"
+              >
+                Category
+              </Link>
             </li>
-            <li className="menu">
-              <Link to="/admin/product">Product</Link>
+            <li>
+              <Link
+                className="hover:underline decoration-2"
+                to="/admin/product"
+              >
+                Product
+              </Link>
             </li>
-            <li className="menu">
-              <Link to="/admin/order">Order</Link>
+            <li>
+              <Link className="hover:underline decoration-2" to="/admin/order">
+                Order
+              </Link>
             </li>
-            <li className="menu">
-              <Link to="/admin/customer">Customer</Link>
+            <li>
+              <Link className="hover:underline decoration-2" to="/admin/customer">
+                Customer
+              </Link>
             </li>
           </ul>
         </div>
-        <div className="float-right">
-          Hello <b>{this.context.username}</b> |
-          <Link to="/admin/home" onClick={() => this.lnkLogoutClick()}>
-            Logout
-          </Link>
-        </div>
-        <div className="float-clear" />
+        <Link
+          className="hover:bg-slate-100 normal-case border rounded px-2 py-1"
+          to="/admin/home"
+          onClick={() => this.lnkLogoutClick()}
+        >
+          Logout
+        </Link>
       </div>
     );
   }
+
   // event-handlers
   lnkLogoutClick() {
     this.context.setToken('');
