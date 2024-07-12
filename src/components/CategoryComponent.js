@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
-// import CategoryDetail from './CategoryDetailComponent';
 
 class Category extends Component {
   static contextType = MyContext; // using this.context to access global state
@@ -70,10 +69,6 @@ class Category extends Component {
             </thead>
             <tbody>{cates}</tbody>
           </table>
-          {/* <CategoryDetail
-            item={this.state.itemSelected}
-            updateCategories={this.updateCategories}
-          /> */}
         </div>
 
         <dialog id="add-category-dlg" className="rounded border">

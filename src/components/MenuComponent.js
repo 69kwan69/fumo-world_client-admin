@@ -52,6 +52,7 @@ class Menu extends Component {
       </div>
     );
   }
+
   // event-handlers
   lnkLogoutClick() {
     this.context.setToken('');
