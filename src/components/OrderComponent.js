@@ -14,41 +14,31 @@ class Order extends Component {
   }
 
   render() {
-    const orders = this.state.orders.map((item, index) => {
+    const orders = this.state.orders.map((item) => {
       return (
-        <tr
-          key={item._id}
-          className={
-            index % 2 === 0
-              ? 'hover:bg-slate-100'
-              : 'hover:bg-slate-100 bg-slate-50'
-          }
-          onClick={() => this.trItemClick(item)}
-        >
-          <td className="p-4 text-left">{item._id}</td>
-          <td className="p-4 text-left">
-            {new Date(item.cdate).toLocaleString()}
-          </td>
-          <td className="p-4 text-left">{item.customer.name}</td>
-          <td className="p-4 text-left">{item.customer.phone}</td>
-          <td className="p-4 text-left">{item.total}</td>
-          <td className="p-4 text-left">{item.status}</td>
-          <td className="p-4 text-left">
+        <tr key={item._id} onClick={() => this.trItemClick(item)}>
+          <td>{item._id}</td>
+          <td>{new Date(item.cdate).toLocaleString()}</td>
+          <td>{item.customer.name}</td>
+          <td>{item.customer.phone}</td>
+          <td>{item.total}</td>
+          <td>{item.status}</td>
+          <td className="flex flex-nowrap gap-4">
             {item.status === 'PENDING' && (
-              <div>
+              <>
                 <button
-                  className="hover:bg-slate-200 normal-case border rounded px-2 py-1"
+                  className="button"
                   onClick={() => this.lnkApproveClick(item._id)}
                 >
                   Approve
                 </button>
                 <button
-                  className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1"
+                  className="button"
                   onClick={(e) => this.lnkCancelClick(e, item._id)}
                 >
                   Cancel
                 </button>
-              </div>
+              </>
             )}
           </td>
         </tr>
@@ -58,73 +48,63 @@ class Order extends Component {
     if (this.state.order) {
       var items = this.state.order.items.map((item, index) => {
         return (
-          <tr
-            className={
-              index % 2 === 0
-                ? 'hover:bg-slate-100'
-                : 'hover:bg-slate-100 bg-slate-50'
-            }
-            key={item.product._id}
-          >
-            <td className="p-4 text-left">{index + 1}</td>
-            <td className="p-4 text-left">{item.product._id}</td>
-            <td className="p-4 text-left">{item.product.name}</td>
-            <td className="p-4 text-left">
-              <img
-                src={'data:image/jpg;base64,' + item.product.image}
-                width="70px"
-                height="70px"
-                alt=""
-              />
+          <tr key={item.product._id}>
+            <td>{index + 1}</td>
+            <td>{item.product._id}</td>
+            <td>{item.product.name}</td>
+            <td>
+              <img src={'data:image/jpg;base64,' + item.product.image} alt="" />
             </td>
-            <td className="p-4 text-left">{item.product.price}</td>
-            <td className="p-4 text-left">{item.quantity}</td>
-            <td className="p-4 text-left">
-              {item.product.price * item.quantity}
-            </td>
+            <td>{item.product.price}</td>
+            <td>{item.quantity}</td>
+            <td>{item.product.price * item.quantity}</td>
           </tr>
         );
       });
     }
 
     return (
-      <div className="p-10">
+      <div className="main">
         <div>
-          <h1 className="font-bold text-2xl uppercase mb-6">Orders</h1>
+          <h1 className="title mb-6">Orders</h1>
 
-          <table className="table-auto border-collapse border w-full">
-            <thead>
-              <tr className="border-b bg-slate-300">
-                <th className="p-4 text-left">ID</th>
-                <th className="p-4 text-left">Creation date</th>
-                <th className="p-4 text-left">Cust.name</th>
-                <th className="p-4 text-left">Cust.phone</th>
-                <th className="p-4 text-left">Total</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>{orders}</tbody>
-          </table>
+          <div className="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Creation date</th>
+                  <th>Cust.name</th>
+                  <th>Cust.phone</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>{orders}</tbody>
+            </table>
+          </div>
         </div>
 
         {this.state.order && (
           <div className="mt-10">
             <h2 className="text-xl uppercase mb-6">Details</h2>
-            <table className="table-auto border-collapse border w-full">
-              <thead>
-                <tr className="border-b bg-slate-300">
-                  <th className="p-4 text-left">No.</th>
-                  <th className="p-4 text-left">Prod.ID</th>
-                  <th className="p-4 text-left">Prod.name</th>
-                  <th className="p-4 text-left">Image</th>
-                  <th className="p-4 text-left">Price</th>
-                  <th className="p-4 text-left">Quantity</th>
-                  <th className="p-4 text-left">Amount</th>
-                </tr>
-              </thead>
-              <tbody>{items}</tbody>
-            </table>
+            <div className="table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Prod.ID</th>
+                    <th>Prod.name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>{items}</tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

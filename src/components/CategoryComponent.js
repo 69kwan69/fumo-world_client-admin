@@ -16,26 +16,18 @@ class Category extends Component {
   render() {
     const cates = this.state.categories.map((item, index) => {
       return (
-        <tr
-          className={
-            index % 2 === 0
-              ? 'hover:bg-slate-100'
-              : 'hover:bg-slate-100 bg-slate-50'
-          }
-          key={item._id}
-          onClick={() => this.trItemClick(item)}
-        >
-          <td className="py-2 px-4">{item._id}</td>
-          <td className="py-2 px-4">{item.name}</td>
-          <td className="py-2 px-4 flex items-center justify-center gap-2">
+        <tr key={item._id} onClick={() => this.trItemClick(item)}>
+          <td>{item._id}</td>
+          <td>{item.name}</td>
+          <td className="space-x-4">
             <button
-              className="hover:bg-slate-200 normal-case border rounded px-2 py-1"
+              className="button"
               onClick={() => this.openUpdateCategory(item._id, item.name)}
             >
               Update
             </button>
             <button
-              className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1"
+              className="button"
               onClick={(e) =>
                 this.btnDeleteClick(e, { txtID: item._id, txtName: item.name })
               }
@@ -48,55 +40,53 @@ class Category extends Component {
     });
 
     return (
-      <div className="p-10">
+      <div className="main">
         <div className="mb-6 flex justify-between items-center gap-10">
-          <h1 className="font-bold text-2xl uppercase">Categories</h1>
+          <h1 className="title">Categories</h1>
           <button
-            className="hover:bg-green-600 hover:text-white normal-case border rounded px-2 py-1"
+            className="button shadow"
             onClick={() => this.openCreateCategory()}
           >
-            New Category
+            New category
           </button>
         </div>
-        <div className="">
-          <table className="table-auto border-collapse border w-full">
-            <thead className="border-b bg-slate-300">
+        <div className="table">
+          <table>
+            <thead>
               <tr>
-                <th className="p-4 text-left">Id</th>
-                <th className="p-4 text-left">Name</th>
-                <th className="p-4 text-left">Action</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>{cates}</tbody>
           </table>
         </div>
 
-        <dialog id="add-category-dlg" className="rounded border">
-          <form className="flex gap-4 p-4 justify-center items-center">
+        <dialog id="add-category-dlg" className="dlg">
+          <form className="form">
             <input
               id="add-category"
-              className="px-4 py-2 border rounded"
               type="text"
               placeholder="Category name..."
             />
-            <button
-              className="hover:bg-slate-200 normal-case border rounded px-2 py-1"
-              onClick={(e) => this.btnAddClick(e)}
-            >
-              Create
-            </button>
-            <button
-              type="button"
-              className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1"
-              onClick={() => this.closeCreateCategory()}
-            >
-              Cancel
-            </button>
+            <div className="buttons">
+              <button className="button" onClick={(e) => this.btnAddClick(e)}>
+                Create
+              </button>
+              <button
+                type="button"
+                className="button"
+                onClick={() => this.closeCreateCategory()}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </dialog>
 
-        <dialog id="update-category-dlg" className="rounded border">
-          <form className="flex gap-4 p-4 justify-center items-center">
+        <dialog id="update-category-dlg" className="dlg">
+          <form className="form">
             <input
               id="update-category"
               className="px-4 py-2 border rounded"
@@ -104,19 +94,21 @@ class Category extends Component {
               placeholder="Category name..."
               data-id
             />
-            <button
-              className="hover:bg-slate-200 normal-case border rounded px-2 py-1"
-              onClick={(e) => this.btnUpdateClick(e)}
-            >
-              Update
-            </button>
-            <button
-              type="button"
-              className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1"
-              onClick={() => this.closeUpdateCategory()}
-            >
-              Cancel
-            </button>
+            <div className="buttons">
+              <button
+                className="button"
+                onClick={(e) => this.btnUpdateClick(e)}
+              >
+                Update
+              </button>
+              <button
+                type="button"
+                className="button"
+                onClick={() => this.closeUpdateCategory()}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </dialog>
       </div>

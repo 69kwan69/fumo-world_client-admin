@@ -1,50 +1,39 @@
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 class Menu extends Component {
   static contextType = MyContext; // using this.context to access global state
-  
+
   render() {
     return (
-      <div className="border p-4 flex items-center justify-between">
+      <div className="nav">
         <div className="uppercase">
-          <ul className="flex gap-4">
-            <li>
-              <Link className="hover:underline decoration-2" to="/admin/home">
-                Home
-              </Link>
-            </li>
+          <ul>
             <li>
               <Link
-                className="hover:underline decoration-2"
-                to="/admin/category"
+                className="font-bold normal-case hover:!no-underline text-xl"
+                to="/admin/home"
               >
-                Category
+                ᗜˬᗜ Admin
               </Link>
             </li>
             <li>
-              <Link
-                className="hover:underline decoration-2"
-                to="/admin/product"
-              >
-                Product
-              </Link>
+              <NavLink to="/admin/category">Category</NavLink>
             </li>
             <li>
-              <Link className="hover:underline decoration-2" to="/admin/order">
-                Order
-              </Link>
+              <NavLink to="/admin/product">Product</NavLink>
             </li>
             <li>
-              <Link className="hover:underline decoration-2" to="/admin/customer">
-                Customer
-              </Link>
+              <NavLink to="/admin/order">Order</NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin/customer">Customer</NavLink>
             </li>
           </ul>
         </div>
         <Link
-          className="hover:bg-slate-100 normal-case border rounded px-2 py-1"
+          className="button"
           to="/admin/home"
           onClick={() => this.lnkLogoutClick()}
         >
@@ -60,4 +49,5 @@ class Menu extends Component {
     this.context.setUsername('');
   }
 }
+
 export default Menu;

@@ -14,46 +14,46 @@ class Login extends Component {
   render() {
     if (this.context.token === '') {
       return (
-        <div className="flex flex-col items-center justify-center min-h-dvh gap-4">
-          <h2 className="font-bold text-2xl uppercase">Admin Login</h2>
-          <form className="p-4 border rounded flex flex-col gap-4">
-            <label>
-              Username
-              <br />
-              <input
-                className="px-4 py-2 border rounded"
-                type="text"
-                value={this.state.txtUsername}
-                onChange={(e) => {
-                  this.setState({ txtUsername: e.target.value });
-                }}
-              />
-            </label>
-            <label>
-              Password
-              <br />
-              <input
-                className="px-4 py-2 border rounded"
-                type="password"
-                value={this.state.txtPassword}
-                onChange={(e) => {
-                  this.setState({ txtPassword: e.target.value });
-                }}
-              />
-            </label>
-            <button
-              className="px-4 py-2 border font-bold rounded uppercase"
-              onClick={(e) => this.btnLoginClick(e)}
-            >
-              Login
-            </button>
-          </form>
+        <div className="grid place-items-center min-h-dvh">
+          <div>
+            <h1 className="title text-2xl mb-6">Admin Login</h1>
+            <form className="form border rounded-md w-80 shadow">
+              <label>
+                Username
+                <br />
+                <input
+                  type="text"
+                  value={this.state.txtUsername}
+                  onChange={(e) => {
+                    this.setState({ txtUsername: e.target.value });
+                  }}
+                />
+              </label>
+              <label>
+                Password
+                <br />
+                <input
+                  type="password"
+                  value={this.state.txtPassword}
+                  onChange={(e) => {
+                    this.setState({ txtPassword: e.target.value });
+                  }}
+                />
+              </label>
+              <button
+                className="button uppercase font-bold tracking-widest"
+                onClick={(e) => this.btnLoginClick(e)}
+              >
+                Login
+              </button>
+            </form>
+          </div>
         </div>
       );
     }
     return <div />;
   }
-  
+
   // event-handlers
   btnLoginClick(e) {
     e.preventDefault();

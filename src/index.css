@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav {
+    @apply border-b p-4 flex items-center justify-between lg:px-32;
+
+    ul {
+      @apply flex items-center gap-4;
+    }
+
+    li > a {
+      @apply hover:underline decoration-2 underline-offset-4;
+    }
+
+    li > a.active {
+      @apply underline decoration-2 underline-offset-4;
+    }
+  }
+
+  .main {
+    @apply p-10 lg:px-32;
+  }
+
+  .title {
+    @apply font-bold text-3xl uppercase;
+  }
+
+  .button {
+    @apply bg-slate-100 hover:bg-slate-200 border rounded px-4 py-2;
+  }
+
+  .table {
+    @apply overflow-hidden border rounded-lg w-full shadow;
+
+    table {
+      @apply table-auto border-collapse w-full;
+    }
+
+    thead {
+      @apply bg-slate-300;
+    }
+
+    thead > tr > * {
+      @apply p-4 text-left;
+    }
+
+    tbody > tr > * {
+      @apply p-4;
+    }
+
+    tbody > tr {
+      @apply hover:bg-slate-100 even:bg-slate-50;
+    }
+
+    td > img {
+      @apply mix-blend-darken object-cover w-24 h-16;
+    }
+  }
+
+  .dlg {
+    @apply rounded border;
+  }
+
+  .form {
+    @apply p-6 flex flex-col gap-4;
+
+    input,
+    textarea,
+    select {
+      @apply bg-slate-50 px-4 py-2 border rounded w-full;
+    }
+
+    .buttons {
+      @apply flex gap-4 *:flex-1;
+    }
+  }
+}

@@ -37,38 +37,25 @@ class Product extends Component {
       }
     });
 
-    const prods = this.state.products.map((item, index) => {
+    const prods = this.state.products.map((item) => {
       return (
-        <tr
-          key={item._id}
-          className={
-            index % 2 === 0
-              ? 'hover:bg-slate-100'
-              : 'hover:bg-slate-100 bg-slate-50'
-          }
-          onClick={() => this.trItemClick(item)}
-        >
-          <td className="py-2 px-4">
-            <img
-              src={'data:image/jpg;base64,' + item.image}
-              width="100px"
-              height="100px"
-              alt=""
-            />
+        <tr key={item._id} onClick={() => this.trItemClick(item)}>
+          <td>
+            <img src={'data:image/jpg;base64,' + item.image} alt="" />
           </td>
-          <td className="py-2 px-4">{item.name}</td>
-          <td className="py-2 px-4">{item.price}</td>
-          <td className="py-2 px-4">{item.category.name}</td>
-          <td className="py-2 px-4">{new Date(item.cdate).toLocaleString()}</td>
-          <td className="py-2 px-4">
+          <td>{item.name}</td>
+          <td>{item.price}</td>
+          <td>{item.category.name}</td>
+          <td>{new Date(item.cdate).toLocaleString()}</td>
+          <td className="space-x-4">
             <button
-              className="hover:bg-slate-200 normal-case border rounded px-2 py-1"
+              className="button"
               onClick={() => this.openUpdateProduct(item)}
             >
               Update
             </button>
             <button
-              className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1"
+              className="button"
               onClick={(e) => this.btnDeleteClick(e, item._id)}
             >
               Delete
@@ -82,9 +69,11 @@ class Product extends Component {
       { length: this.state.noPages },
       (_, index) => (
         <span
-          className={`hover:underline cursor-pointer ${
-            index + 1 === this.state.curPage ? 'font-bold' : ''
-          }`}
+          className={`${
+            index + 1 === this.state.curPage
+              ? '!bg-slate-300 !text-black !hover:bg-slate-300'
+              : ''
+          } cursor-pointer rounded px-3 py-1 hover:bg-slate-100 text-slate-500`}
           key={index}
           onClick={() => this.lnkPageClick(index + 1)}
         >
@@ -94,58 +83,49 @@ class Product extends Component {
     );
 
     return (
-      <div className="p-10">
+      <div className="main">
         <div className="mb-6 flex items-center justify-between gap-10">
-          <h1 className="font-bold text-2xl uppercase">Products</h1>
+          <h1 className="title">Products</h1>
           <button
-            className="hover:bg-green-600 hover:text-white normal-case border rounded px-2 py-1"
+            className="button shadow"
             onClick={() => this.openCreateProduct()}
           >
-            New Product
+            New product
           </button>
         </div>
 
-        <table className="table-auto border-collapse border w-full">
-          <thead className="border-b bg-slate-300">
-            <tr>
-              <th className="p-4 text-left">Image</th>
-              <th className="p-4 text-left">Name</th>
-              <th className="p-4 text-left">Price</th>
-              <th className="p-4 text-left">Category</th>
-              <th className="p-4 text-left">Created At</th>
-              <th className="p-4 text-left">Action</th>
-            </tr>
-          </thead>
-          <tbody>{prods}</tbody>
-        </table>
+        <div className="table">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>{prods}</tbody>
+          </table>
+        </div>
 
-        <div className="mt-6 w-full flex justify-center gap-2 text-lg items-center">
+        <div className="mt-6 w-full flex justify-center items-center">
           {pagination}
         </div>
 
-        <dialog id="add-product-dlg" className="rounded border max-w-72">
-          <form className="flex flex-col gap-4 p-6">
-            <h2 className="font-bold text-xl">New Product</h2>
+        <dialog id="add-product-dlg" className="dlg max-w-96">
+          <form className="form">
+            <h2 className="font-bold text-2xl">New Product</h2>
             <label>
-              Name:{' '}
-              <input
-                className="px-4 py-2 border rounded w-full"
-                type="text"
-                name="name"
-              />
+              Name: <input type="text" name="name" />
             </label>
             <label>
-              Price:{' '}
-              <input
-                className="px-4 py-2 border rounded w-full"
-                type="number"
-                name="price"
-              />
+              Price: <input type="number" name="price" />
             </label>
             <label>
               Category:{' '}
               <select
-                className="px-4 py-2 border rounded w-full"
                 name="category"
                 onChange={(e) => {
                   this.setState({ cmbCategory: e.target.value });
@@ -167,16 +147,13 @@ class Product extends Component {
 
             <img className="block w-full" src={this.state.imgProduct} alt="" />
 
-            <div className="flex justify-between gap-4">
-              <button
-                className="hover:bg-slate-200 normal-case border rounded px-2 py-1 flex-1"
-                onClick={(e) => this.btnAddClick(e)}
-              >
+            <div className="buttons">
+              <button className="button" onClick={(e) => this.btnAddClick(e)}>
                 Create
               </button>
               <button
                 type="button"
-                className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1 flex-1"
+                className="button"
                 onClick={() => this.closeCreateProduct()}
               >
                 Cancel
@@ -185,33 +162,18 @@ class Product extends Component {
           </form>
         </dialog>
 
-        <dialog
-          data-id
-          id="update-product-dlg"
-          className="rounded border max-w-72"
-        >
-          <form className="flex flex-col gap-4 p-6">
-            <h2 className="font-bold text-xl">Edit Product</h2>
+        <dialog data-id id="update-product-dlg" className="dlg max-w-96">
+          <form className="form">
+            <h2 className="font-bold text-2xl">Edit Product</h2>
             <label>
-              Name:{' '}
-              <input
-                className="px-4 py-2 border rounded w-full"
-                type="text"
-                name="name"
-              />
+              Name: <input type="text" name="name" />
             </label>
             <label>
-              Price:{' '}
-              <input
-                className="px-4 py-2 border rounded w-full"
-                type="number"
-                name="price"
-              />
+              Price: <input type="number" name="price" />
             </label>
             <label>
               Category:{' '}
               <select
-                className="px-4 py-2 border rounded w-full"
                 name="category"
                 onChange={(e) => {
                   this.setState({ cmbCategory: e.target.value });
@@ -233,16 +195,16 @@ class Product extends Component {
 
             <img className="block w-full" src={this.state.imgProduct} alt="" />
 
-            <div className="flex justify-between gap-4">
+            <div className="buttons">
               <button
-                className="hover:bg-slate-200 normal-case border rounded px-2 py-1 flex-1"
+                className="button"
                 onClick={(e) => this.btnUpdateClick(e)}
               >
                 Confirm
               </button>
               <button
                 type="button"
-                className="hover:bg-red-600 hover:text-white normal-case border rounded px-2 py-1 flex-1"
+                className="button"
                 onClick={() => this.closeUpdateProduct()}
               >
                 Cancel
@@ -256,6 +218,7 @@ class Product extends Component {
 
   // dialog
   openCreateProduct() {
+    this.setState({ imgProduct: '' });
     document.querySelector('#add-product-dlg').showModal();
   }
 
@@ -269,7 +232,7 @@ class Product extends Component {
     modal.querySelectorAll('option').forEach((option) => {
       if (option.value === category._id) option.selected = true;
     });
-    this.state.imgProduct = 'data:image/jpg;base64,' + image;
+    this.setState({ imgProduct: 'data:image/jpg;base64,' + image });
 
     modal.showModal();
   }
