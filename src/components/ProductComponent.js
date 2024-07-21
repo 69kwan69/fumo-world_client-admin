@@ -37,14 +37,15 @@ class Product extends Component {
       }
     });
 
-    const prods = this.state.products.map((item) => {
+    const prods = this.state.products.map((item, index) => {
       return (
         <tr key={item._id} onClick={() => this.trItemClick(item)}>
+          <td>{index + 1}</td>
           <td>
             <img src={'data:image/jpg;base64,' + item.image} alt="" />
           </td>
           <td>{item.name}</td>
-          <td>{item.price}</td>
+          <td>${item.price}</td>
           <td>{item.category.name}</td>
           <td>{new Date(item.cdate).toLocaleString()}</td>
           <td className="space-x-4">
@@ -98,6 +99,7 @@ class Product extends Component {
           <table>
             <thead>
               <tr>
+                <th>No</th>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>

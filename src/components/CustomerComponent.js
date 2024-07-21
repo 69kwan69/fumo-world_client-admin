@@ -15,16 +15,28 @@ class Customer extends Component {
   }
 
   render() {
-    const customers = this.state.customers.map((item) => {
+    const customers = this.state.customers.map((item, index) => {
       return (
         <tr key={item._id} onClick={() => this.trCustomerClick(item)}>
-          <td>{item._id}</td>
+          <td>{index + 1}</td>
           <td>{item.username}</td>
           <td>{item.password}</td>
           <td>{item.name}</td>
           <td>{item.phone}</td>
           <td>{item.email}</td>
-          <td>{item.active}</td>
+          <td>
+            <span
+              className={
+                item.active == 1
+                  ? 'text-green-700'
+                  : item.active == 0
+                  ? 'text-red-700'
+                  : ''
+              }
+            >
+              {item.active == 1 ? 'Active' : 'Inactive'}
+            </span>
+          </td>
           <td>
             {item.active === 0 ? (
               <button
@@ -46,15 +58,27 @@ class Customer extends Component {
       );
     });
 
-    const orders = this.state.orders.map((item) => {
+    const orders = this.state.orders.map((item, index) => {
       return (
         <tr key={item._id} onClick={() => this.trOrderClick(item)}>
-          <td>{item._id}</td>
+          <td>{index + 1}</td>
           <td>{new Date(item.cdate).toLocaleString()}</td>
           <td>{item.customer.name}</td>
           <td>{item.customer.phone}</td>
-          <td>{item.total}</td>
-          <td>{item.status}</td>
+          <td>${item.total}</td>
+          <td>
+            <span
+              className={
+                item.status === 'CANCELED'
+                  ? 'text-red-700'
+                  : item.status === 'APPROVED'
+                  ? 'text-green-700'
+                  : ''
+              }
+            >
+              {item.status}
+            </span>
+          </td>
         </tr>
       );
     });
@@ -64,14 +88,13 @@ class Customer extends Component {
         return (
           <tr key={item.product._id}>
             <td>{index + 1}</td>
-            <td>{item.product._id}</td>
-            <td>{item.product.name}</td>
             <td>
               <img src={'data:image/jpg;base64,' + item.product.image} alt="" />
             </td>
-            <td>{item.product.price}</td>
+            <td>{item.product.name}</td>
+            <td>{item.product.category.name}</td>
             <td>{item.quantity}</td>
-            <td>{item.product.price * item.quantity}</td>
+            <td>${item.product.price * item.quantity}</td>
           </tr>
         );
       });
@@ -86,13 +109,13 @@ class Customer extends Component {
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>No</th>
                   <th>Username</th>
                   <th>Password</th>
                   <th>Name</th>
                   <th>Phone</th>
                   <th>Email</th>
-                  <th>Active</th>
+                  <th>Activity</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -129,11 +152,10 @@ class Customer extends Component {
               <table>
                 <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Prod.ID</th>
-                    <th>Prod.name</th>
+                    <th>No</th>
                     <th>Image</th>
-                    <th>Price</th>
+                    <th>Product</th>
+                    <th>Category</th>
                     <th>Quantity</th>
                     <th>Amount</th>
                   </tr>
